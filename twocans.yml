@@ -1,0 +1,15 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Build twocans container
+      docker_image:
+        path: /vagrant/twocans/
+        name: twocans
+        state: build
+
+    - name: Launch twocans
+      docker_container:
+        name: twocans
+        image: twocans
+        state: started
+        ports: 0.0.0.0:8000:8000

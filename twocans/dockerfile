@@ -1,0 +1,11 @@
+FROM centos:latest
+MAINTAINER me
+COPY . /app
+RUN yum install epel-release -y
+RUN yum install python34 python34-pip -y
+RUN pip3 install flask flask-bcrypt flask-login flask-wtf redis peewee PyMySQL
+WORKDIR /app
+ENTRYPOINT ["python3"]
+CMD ["app.py"]
+
+# CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"

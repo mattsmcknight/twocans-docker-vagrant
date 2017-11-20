@@ -1,0 +1,15 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Build haproxy container
+      docker_image:
+        path: /vagrant/haproxy-docker/
+        name: haproxy
+        state: build
+
+    - name: Launch haproxy
+      docker_container:
+        name: haproxy
+        image: haproxy
+        state: started
+        ports: 0.0.0.0:80:80

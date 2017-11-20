@@ -1,0 +1,22 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Set MySQL permissions
+      file:
+        state: directory
+        path: /var/lib/mysql
+
+    - name: MariaDB Container
+      docker_container:
+        name: mysql
+        image: mariadb
+        command:
+        state: started
+        ports: 0.0.0.0:3306:3306
+        volumes:
+          - /var/lib/mysql:/var/lib/mysql
+        env:
+          MYSQL_ROOT_PASSWORD: Python12345
+          MYSQL_DATABASE: twocans
+          MYSQL_USER: twocans
+          MYSQL_PASSWORD: Python12345

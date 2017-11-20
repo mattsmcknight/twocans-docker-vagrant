@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Get docker repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+        mode: 0644
+
+    - name: Yum Packages
+      yum: pkg={{item}} state=present
+      with_items:
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+        - python-docker-py
+        - python-docker-pycreds
+        - docker-ce
+
+    - service:
+        name: docker
+        state: started
+        enabled: yes
+...

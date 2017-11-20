@@ -1,0 +1,10 @@
+FROM haproxy:1.5
+
+MAINTAINER me
+
+
+COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
+
+EXPOSE 80
+
+#CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
